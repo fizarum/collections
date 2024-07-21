@@ -41,6 +41,7 @@ bool ArrayAdd(Array_t* array, void* value) {
 	if (ArrayIsFull(array) == true) return false;
 	array->values[array->size] = (_ptr)value;
 	array->size++;
+	return true;
 }
 
 bool ArrayRemove(Array_t* array, void* value) {
