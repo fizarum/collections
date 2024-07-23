@@ -29,6 +29,7 @@ extern "C" {
 	bool ArrayRemove(Array_t* array, void* value);
 
 	void* ArrayValueAt(const Array_t* array, const _u16 index);
+	void* ArrayLastValue(const Array_t* array);
 	const _u16 ArrayIndexOf(const Array_t* array, void* value);
 	const _u16 ArrayLastIndex(const Array_t* array);
 

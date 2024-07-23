@@ -63,6 +63,12 @@ void* ArrayValueAt(const Array_t* array, const _u16 index) {
 	return NULL;
 }
 
+void* ArrayLastValue(const Array_t* array) {
+	_u16 index = ArrayLastIndex(array);
+
+	return (void*)ArrayValueAt(array, index);
+}
+
 const _u16 ArrayIndexOf(const Array_t* array, void* value) {
 	for (_u16 index = 0; index < array->size; index++) {
 		if (array->values[index] == (_ptr)value) {
