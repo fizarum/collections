@@ -5,14 +5,7 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stdbool.h>
-
-	typedef uint8_t _u8;
-	typedef int8_t _i8;
-	typedef uint16_t _u16;
-	typedef uintptr_t _ptr;
-	typedef uintptr_t _key;
+#include "types.h"
 
 #define ARRAY_INDEX_NONE UINT16_MAX
 
