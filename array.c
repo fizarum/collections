@@ -4,6 +4,7 @@
 #include <string.h>
 
 typedef struct Array_t {
+	// pointer on pointers of data
 	_ptr* values;
 	// count of added items in array
 	_u16 size;
@@ -34,8 +35,13 @@ void ArrayClear(Array_t* array) {
 	array->size = 0;
 }
 
-_u16 ArraySize(const Array_t* array) { return array->size; }
-_u16 ArrayCapacity(const Array_t* array) { return array->capacity; }
+_u16 ArraySize(const Array_t* array) { 
+	return array->size; 
+}
+
+_u16 ArrayCapacity(const Array_t* array) { 
+	return array->capacity; 
+}
 
 bool ArrayAdd(Array_t* array, void* value) {
 	if (ArrayIsFull(array) == true) return false;
