@@ -1,6 +1,7 @@
 #include "stack.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Stack_t {
 	// pointer on pointers of data
