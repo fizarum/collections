@@ -14,6 +14,9 @@ extern "C" {
 	typedef uintptr_t _ptr;
 	typedef uintptr_t _key;
 
+	typedef const bool (BooleanPredicate)(const void* expected, const void* actual);
+	typedef void (VoidIterator)(const void* value);
+
 #ifdef __cplusplus
 }
 #endif

@@ -12,6 +12,7 @@ typedef struct Array_t {
 	_u16 capacity;
 } Array_t;
 
+
 Array_t* ArrayCreate(_u16 capcity) {
 	Array_t* array = (Array_t*)malloc(sizeof(Array_t));
 
@@ -35,12 +36,12 @@ void ArrayClear(Array_t* array) {
 	array->size = 0;
 }
 
-_u16 ArraySize(const Array_t* array) { 
-	return array->size; 
+_u16 ArraySize(const Array_t* array) {
+	return array->size;
 }
 
-_u16 ArrayCapacity(const Array_t* array) { 
-	return array->capacity; 
+_u16 ArrayCapacity(const Array_t* array) {
+	return array->capacity;
 }
 
 bool ArrayAdd(Array_t* array, void* value) {
@@ -97,9 +98,19 @@ bool ArrayIsEmpty(const Array_t* array) {
 	return array->size == 0;
 }
 
-void ArrayForeach(const Array_t* array, void(callback)(void* value)) {
+void ArrayForeach(const Array_t* array, VoidIterator iterator) {
 	for (_u16 index = 0; index < array->size; index++) {
 		void* value = (void*)(array->values[index]);
-		callback(value);
+		iterator(value);
 	}
+}
+
+void* ArrayFind(const Array_t* array, const void* expected, BooleanPredicate predicate) {
+	for (_u16 index = 0; index < array->size; index++) {
+		void* value = (void*)(array->values[index]);
+		if (predicate(expected, value) == true) {
+			return value;
+		}
+	}
+	return NULL;
 }
