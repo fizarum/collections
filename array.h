@@ -10,7 +10,7 @@ extern "C" {
 #define ARRAY_INDEX_NONE UINT16_MAX
 
 	typedef struct Array_t Array_t;
-
+	
 	Array_t* ArrayCreate(_u16 capcity);
 	void ArrayDestroy(Array_t* array);
 	void ArrayClear(Array_t* array);
@@ -29,7 +29,14 @@ extern "C" {
 	bool ArrayIsFull(const Array_t* array);
 	bool ArrayIsEmpty(const Array_t* array);
 
-	void ArrayForeach(const Array_t* array, void(callback)(void* value));
+	void ArrayForeach(const Array_t* array, VoidIterator iterator);
+
+	/**
+	* @brief finds element in array
+	* @param expected - value to compare with
+	* @param predicate - function which may return true when value satisfy search request
+	*/
+	void* ArrayFind(const Array_t* array, const void* expected, BooleanPredicate predicate);
 
 #ifdef __cplusplus
 }
