@@ -31,11 +31,6 @@ void ArrayDestroy(Array_t* array) {
 	free(array);
 }
 
-void ArrayClear(Array_t* array) {
-	memset(array->values, 0, sizeof(_ptr) * (array->capacity));
-	array->size = 0;
-}
-
 _u16 ArraySize(const Array_t* array) {
 	return array->size;
 }
@@ -61,6 +56,11 @@ bool ArrayRemove(Array_t* array, void* value) {
 		array->values[index] = array->values[index + 1];
 	}
 	return true;
+}
+
+void ArrayClear(Array_t* array) {
+	memset(array->values, 0, sizeof(_ptr) * (array->capacity));
+	array->size = 0;
 }
 
 void* ArrayValueAt(const Array_t* array, const _u16 index) {
@@ -90,11 +90,11 @@ const _u16 ArrayLastIndex(const Array_t* array) {
 	return array->size - 1;
 }
 
-bool ArrayIsFull(const Array_t* array) {
+const bool ArrayIsFull(const Array_t* array) {
 	return array->size == array->capacity;
 }
 
-bool ArrayIsEmpty(const Array_t* array) {
+const bool ArrayIsEmpty(const Array_t* array) {
 	return array->size == 0;
 }
 
