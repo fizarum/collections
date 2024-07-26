@@ -16,6 +16,7 @@ extern "C" {
 
 	typedef const bool (BooleanPredicate)(const void* expected, const void* actual);
 	typedef void (VoidIterator)(const void* value);
+	typedef void (KeyValueIterator)(const _u16 key, const void* value);
 
 #ifdef __cplusplus
 }

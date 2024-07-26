@@ -26,8 +26,8 @@ extern "C" {
 	const _u16 ArrayIndexOf(const Array_t* array, void* value);
 	const _u16 ArrayLastIndex(const Array_t* array);
 
-	bool ArrayIsFull(const Array_t* array);
-	bool ArrayIsEmpty(const Array_t* array);
+	const bool ArrayIsFull(const Array_t* array);
+	const bool ArrayIsEmpty(const Array_t* array);
 
 	void ArrayForeach(const Array_t* array, VoidIterator iterator);
 

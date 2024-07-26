@@ -90,11 +90,11 @@ const _u16 ArrayLastIndex(const Array_t* array) {
 	return array->size - 1;
 }
 
-bool ArrayIsFull(const Array_t* array) {
+const bool ArrayIsFull(const Array_t* array) {
 	return array->size == array->capacity;
 }
 
-bool ArrayIsEmpty(const Array_t* array) {
+const bool ArrayIsEmpty(const Array_t* array) {
 	return array->size == 0;
 }
 
