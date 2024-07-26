@@ -40,14 +40,15 @@ void MapDestroy(Map_t* map) {
 }
 
 
-_u16 MapSize(const Map_t* map) {
+const _u16 MapSize(const Map_t* map) {
 	return map->size;
 }
-_u16 MapCapacity(const Map_t* map) {
+
+const _u16 MapCapacity(const Map_t* map) {
 	return map->capacity;
 }
 
-bool MapSet(Map_t* map, const _u16 key, void* value) {
+const bool MapSet(Map_t* map, const _u16 key, void* value) {
 	_u16 keyIndex = MapIndexOfKey(map, key);
 
 	// no existing index for key (new key) and map is full, cancel
@@ -77,7 +78,7 @@ void* MapGet(const Map_t* map, const _u16 key) {
 	return NULL;
 }
 
-bool MapRemove(Map_t* map, const _u16 key) {
+const bool MapRemove(Map_t* map, const _u16 key) {
 
 	if (MapIsEmpty(map) == true) {
 		return false;

@@ -14,12 +14,12 @@ extern "C" {
 	Map_t* MapCreate(_u16 capacity);
 	void MapDestroy(Map_t* map);
 
-	_u16 MapSize(const Map_t* map);
-	_u16 MapCapacity(const Map_t* map);
+	const _u16 MapSize(const Map_t* map);
+	const _u16 MapCapacity(const Map_t* map);
 
-	bool MapSet(Map_t* map, const _u16 key, void* value);
+	const bool MapSet(Map_t* map, const _u16 key, void* value);
 	void* MapGet(const Map_t* map, const _u16 key);
-	bool MapRemove(Map_t* map, const _u16 key);
+	const bool MapRemove(Map_t* map, const _u16 key);
 	void MapClear(Map_t* map);
 
 	const _u16 MapIndexOfKey(const Map_t* map, const _u16 key);

@@ -13,16 +13,16 @@ extern "C" {
 
 	Stack_t* StackCreate(_u16 capacity);
 	void StackDestroy(Stack_t* stack);
+	
+	const _u16 StackSize(const Stack_t* stack);
+	const _u16 StackCapacity(const Stack_t* stack);
+
+	const bool StackPush(Stack_t* stack, void* value);
+	void* StackPop(Stack_t* stack);
 	void StackClear(Stack_t* stack);
 
-	_u16 StackSize(const Stack_t* stack);
-	_u16 StackCapacity(const Stack_t* stack);
-
-	bool StackPush(Stack_t* stack, void* value);
-	void* StackPop(Stack_t* stack);
-
-	bool StackIsFull(const Stack_t* stack);
-	bool StackIsEmpty(const Stack_t* stack);
+	const bool StackIsFull(const Stack_t* stack);
+	const bool StackIsEmpty(const Stack_t* stack);
 
 #ifdef __cplusplus
 }
