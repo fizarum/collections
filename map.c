@@ -103,8 +103,8 @@ bool MapRemove(Map_t* map, const _u16 key) {
 }
 
 void MapClear(Map_t* map) {
-	map->keys = memset(map->keys, 0, map->size * sizeof(_u16));
-	map->values = memset(map->values, 0, map->size * sizeof(_ptr));
+	memset(map->keys, 0, map->size * sizeof(_u16));
+	memset(map->values, 0, map->size * sizeof(_ptr));
 	map->size = 0;
 }
 

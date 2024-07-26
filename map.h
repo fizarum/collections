@@ -14,7 +14,6 @@ extern "C" {
 	Map_t* MapCreate(_u16 capacity);
 	void MapDestroy(Map_t* map);
 
-
 	_u16 MapSize(const Map_t* map);
 	_u16 MapCapacity(const Map_t* map);
 
