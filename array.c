@@ -31,22 +31,22 @@ void ArrayDestroy(Array_t* array) {
 	free(array);
 }
 
-_u16 ArraySize(const Array_t* array) {
+const _u16 ArraySize(const Array_t* array) {
 	return array->size;
 }
 
-_u16 ArrayCapacity(const Array_t* array) {
+const _u16 ArrayCapacity(const Array_t* array) {
 	return array->capacity;
 }
 
-bool ArrayAdd(Array_t* array, void* value) {
+const bool ArrayAdd(Array_t* array, void* value) {
 	if (ArrayIsFull(array) == true) return false;
 	array->values[array->size] = (_ptr)value;
 	array->size++;
 	return true;
 }
 
-bool ArrayRemove(Array_t* array, void* value) {
+const bool ArrayRemove(Array_t* array, void* value) {
 	_u16 indexToRemove = ArrayIndexOf(array, value);
 	if (indexToRemove == ARRAY_INDEX_NONE) return false;
 

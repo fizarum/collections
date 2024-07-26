@@ -35,15 +35,15 @@ void StackClear(Stack_t* stack) {
 	stack->size = 0;
 }
 
-_u16 StackSize(const Stack_t* stack) {
+const _u16 StackSize(const Stack_t* stack) {
 	return stack->size;
 }
 
-_u16 StackCapacity(const Stack_t* stack) {
+const _u16 StackCapacity(const Stack_t* stack) {
 	return stack->capacity;
 }
 
-bool StackPush(Stack_t* stack, void* value) {
+const bool StackPush(Stack_t* stack, void* value) {
 	if (StackIsFull(stack) == true) return false;
 
 	stack->values[stack->size] = (_ptr)value;
@@ -63,10 +63,10 @@ void* StackPop(Stack_t* stack) {
 	return (void*)value;
 }
 
-bool StackIsFull(const Stack_t* stack) {
+const bool StackIsFull(const Stack_t* stack) {
 	return stack->size == stack->capacity;
 }
 
-bool StackIsEmpty(const Stack_t* stack) {
+const bool StackIsEmpty(const Stack_t* stack) {
 	return stack->size == 0;
 }
