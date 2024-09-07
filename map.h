@@ -22,6 +22,7 @@ void* MapGet(const Map_t* map, const _u16 key);
 bool MapRemove(Map_t* map, const _u16 key);
 void MapClear(Map_t* map);
 
+_u16 MapKeyAt(const Map_t* map, const _u16 index);
 _u16 MapIndexOfKey(const Map_t* map, const _u16 key);
 bool MapKeyExists(const Map_t* map, const _u16 key);
 

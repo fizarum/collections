@@ -103,6 +103,13 @@ void MapClear(Map_t* map) {
   map->size = 0;
 }
 
+_u16 MapKeyAt(const Map_t* map, const _u16 index) {
+  if (index < map->size) {
+    return map->keys[index];
+  }
+  return MAP_INDEX_NONE;
+}
+
 _u16 MapIndexOfKey(const Map_t* map, const _u16 key) {
   for (_u16 index = 0; index < map->size; index++) {
     if (key == map->keys[index]) {
