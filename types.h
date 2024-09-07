@@ -11,6 +11,7 @@ extern "C" {
 typedef uint8_t _u8;
 typedef int8_t _i8;
 typedef uint16_t _u16;
+typedef uint32_t _u32;
 typedef uintptr_t _ptr;
 typedef uintptr_t _key;
 
