@@ -134,3 +134,14 @@ void MapForeach(const Map_t* map, KeyValueIterator iterator) {
     iterator(map->keys[index], (void*)(map->values[index]));
   }
 }
+
+void* MapFind(const Map_t* map, const void* expected,
+              BooleanPredicate predicate) {
+  for (_u16 index = 0; index < map->size; index++) {
+    void* value = (void*)(map->values[index]);
+    if (predicate(expected, value) == true) {
+      return value;
+    }
+  }
+  return NULL;
+}

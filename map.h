@@ -31,6 +31,15 @@ bool MapIsEmpty(const Map_t* map);
 
 void MapForeach(const Map_t* map, KeyValueIterator iterator);
 
+/**
+ * @brief finds element in map
+ * @param expected - value to compare with
+ * @param predicate - function which may return true when value satisfy search
+ * request
+ */
+void* MapFind(const Map_t* map, const void* expected,
+              BooleanPredicate predicate);
+
 #ifdef __cplusplus
 }
 #endif
