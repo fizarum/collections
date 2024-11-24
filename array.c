@@ -53,6 +53,19 @@ bool ArrayRemove(Array_t* array, void* value) {
   return true;
 }
 
+bool ArrayRemoveIndex(Array_t* array, _u16 index) {
+  if (index == ARRAY_INDEX_NONE) return false;
+  if (index > ArrayLastIndex(array)) return false;
+
+  array->values[index] = 0;
+  array->size--;
+  for (_u16 indexToUpdate = index; indexToUpdate < array->capacity;
+       indexToUpdate++) {
+    array->values[indexToUpdate] = array->values[indexToUpdate + 1];
+  }
+  return true;
+}
+
 void ArrayClear(Array_t* array) {
   memset(array->values, 0, sizeof(_ptr) * (array->capacity));
   array->size = 0;

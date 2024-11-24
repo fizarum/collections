@@ -19,6 +19,7 @@ _u16 ArrayCapacity(const Array_t* array);
 
 bool ArrayAdd(Array_t* array, void* value);
 bool ArrayRemove(Array_t* array, void* value);
+bool ArrayRemoveIndex(Array_t* array, _u16 index);
 void ArrayClear(Array_t* array);
 
 void* ArrayValueAt(const Array_t* array, const _u16 index);
