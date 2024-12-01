@@ -31,6 +31,7 @@ void* TreeNode_GetData(TreeNode_t* node);
 bool TreeNode_IsLeaf(const TreeNode_t* node);
 bool TreeNode_HasNoChildren(const TreeNode_t* node);
 TreeNode_t* TreeNode_GetParent(const TreeNode_t* node);
+void TreeNode_Foreach(TreeNode_t* node, TreeIterator iterator);
 
 #ifdef __cplusplus
 }
