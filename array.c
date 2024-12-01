@@ -32,7 +32,9 @@ void ArrayDestroy(Array_t* array) {
 
 _u16 ArraySize(const Array_t* array) { return array != NULL ? array->size : 0; }
 
-_u16 ArrayCapacity(const Array_t* array) { return array != NULL ? array->capacity : 0; }
+_u16 ArrayCapacity(const Array_t* array) {
+  return array != NULL ? array->capacity : 0;
+}
 
 bool ArrayAdd(Array_t* array, void* value) {
   if (ArrayIsFull(array) == true) return false;

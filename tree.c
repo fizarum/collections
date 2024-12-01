@@ -112,20 +112,20 @@ void* TreeNode_GetData(TreeNode_t* node) { return node->data; }
 bool TreeNode_IsLeaf(const TreeNode_t* node) { return node->nodes == NULL; }
 
 bool TreeNode_HasNoChildren(const TreeNode_t* node) {
-  return node->nodes == NULL || ArrayIsEmpty(node->nodes);
+  return TreeNode_IsLeaf(node) || ArrayIsEmpty(node->nodes);
 }
 
 TreeNode_t* TreeNode_GetParent(const TreeNode_t* node) { return node->parent; }
 
 void TreeNode_Foreach(TreeNode_t* node, TreeIterator iterator) {
-    iterator(node);
+  iterator(node);
 
-    if (TreeNode_HasNoChildren(node) == false) {
-        for (_u8 index = 0; index < ArraySize(node->nodes); index++) {
-            TreeNode_t* child = ArrayValueAt(node->nodes, index);
-            TreeNode_Foreach(child, iterator);
-        }
+  if (TreeNode_HasNoChildren(node) == false) {
+    for (_u8 index = 0; index < ArraySize(node->nodes); index++) {
+      TreeNode_t* child = ArrayValueAt(node->nodes, index);
+      TreeNode_Foreach(child, iterator);
     }
+  }
 }
 
 // private part
