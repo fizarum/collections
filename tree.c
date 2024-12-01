@@ -28,7 +28,6 @@ void TreeNode_Destroy(TreeNode_t* node);
 bool TreeNode_AddChild(TreeNode_t* node, TreeNode_t* child);
 static bool TreeNode_SetData(TreeNode_t* node, void* data);
 static void TreeNode_Find(TreeNode_t* node, TreeNode_t** result, const _u16 id);
-static void TreeNode_Foreach(TreeNode_t* root, TreeIterator iterator);
 static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node);
 
 Tree_t* Tree_Create() {
@@ -106,17 +105,6 @@ void Tree_Foreach(Tree_t* tree, TreeIterator iterator) {
   TreeNode_Foreach(root, iterator);
 }
 
-static void TreeNode_Foreach(TreeNode_t* root, TreeIterator iterator) {
-  iterator(root);
-
-  if (TreeNode_HasNoChildren(root) == false) {
-    for (_u8 index = 0; index < ArraySize(root->nodes); index++) {
-      TreeNode_t* child = ArrayValueAt(root->nodes, index);
-      TreeNode_Foreach(child, iterator);
-    }
-  }
-}
-
 _u16 TreeNode_GetId(TreeNode_t* node) { return node->id; }
 
 void* TreeNode_GetData(TreeNode_t* node) { return node->data; }
@@ -128,6 +116,17 @@ bool TreeNode_HasNoChildren(const TreeNode_t* node) {
 }
 
 TreeNode_t* TreeNode_GetParent(const TreeNode_t* node) { return node->parent; }
+
+void TreeNode_Foreach(TreeNode_t* node, TreeIterator iterator) {
+    iterator(node);
+
+    if (TreeNode_HasNoChildren(node) == false) {
+        for (_u8 index = 0; index < ArraySize(node->nodes); index++) {
+            TreeNode_t* child = ArrayValueAt(node->nodes, index);
+            TreeNode_Foreach(child, iterator);
+        }
+    }
+}
 
 // private part
 
