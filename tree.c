@@ -2,8 +2,6 @@
 
 #include <stdlib.h>
 
-#include "array.h"
-
 #define TREE_MAX_CHILDREN 8
 
 typedef struct TreeNode_t {
@@ -22,13 +20,11 @@ typedef struct Tree_t {
 
 static _u16 Tree_GetNextId(Tree_t* tree);
 
-TreeNode_t* TreeNode_Create(_u16 id, _u8 maxNodes);
-void TreeNode_Destroy(TreeNode_t* node);
-
 bool TreeNode_AddChild(TreeNode_t* node, TreeNode_t* child);
 static bool TreeNode_SetData(TreeNode_t* node, void* data);
 static void TreeNode_Find(TreeNode_t* node, TreeNode_t** result, const _u16 id);
-static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node);
+static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node,
+                              TreeNodeChangeCallback callback);
 
 Tree_t* Tree_Create() {
   Tree_t* tree = (Tree_t*)malloc(sizeof(Tree_t));
@@ -43,8 +39,8 @@ Tree_t* Tree_Create() {
   return tree;
 }
 
-void Tree_Destroy(Tree_t* tree) {
-  TreeNode_Destroy(tree->root);
+void Tree_Destroy(Tree_t* tree, TreeNodeChangeCallback callback) {
+  TreeNode_Destroy(tree->root, callback);
 
   free(tree);
 }
@@ -76,7 +72,7 @@ void Tree_RemoveNode(Tree_t* tree, const _u16 nodeId) {
   TreeNode_t* branch = Tree_FindNode(tree, nodeId);
 
   if (branch != NULL) {
-    TreeNode_Destroy(branch);
+    TreeNode_Destroy(branch, NULL);
   }
 }
 
@@ -116,6 +112,8 @@ bool TreeNode_HasNoChildren(const TreeNode_t* node) {
 }
 
 TreeNode_t* TreeNode_GetParent(const TreeNode_t* node) { return node->parent; }
+
+Array_t* TreeNode_GetChildren(const TreeNode_t* node) { return node->nodes; }
 
 void TreeNode_Foreach(TreeNode_t* node, TreeIterator iterator) {
   iterator(node);
@@ -168,9 +166,12 @@ TreeNode_t* TreeNode_Create(_u16 id, _u8 maxNodes) {
   return node;
 }
 
-void TreeNode_Destroy(TreeNode_t* node) { _TreeNode_Destroy(node, node); }
+void TreeNode_Destroy(TreeNode_t* node, TreeNodeChangeCallback callback) {
+  _TreeNode_Destroy(node, node, callback);
+}
 
-static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node) {
+static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node,
+                              TreeNodeChangeCallback callback) {
   // there are three cases:
   // 1. if node root and no children - free node & exit
   // 2. if node has no children - free node and call _TreeNode_Destroy with its
@@ -179,6 +180,9 @@ static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node) {
   if (TreeNode_HasNoChildren(node) == true) {
     bool isRoot = node->id == root->id;
     TreeNode_t* parent = TreeNode_GetParent(node);
+    if (callback != NULL) {
+      callback(node);
+    }
 
     node->data = NULL;
     node->parent = NULL;
@@ -192,7 +196,7 @@ static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node) {
     }
     // case 2
     else {
-      _TreeNode_Destroy(root, parent);
+      _TreeNode_Destroy(root, parent, callback);
     }
   } else {
     // case 3
@@ -200,7 +204,7 @@ static void _TreeNode_Destroy(const TreeNode_t* root, TreeNode_t* node) {
     TreeNode_t* childNode = ArrayValueAt(node->nodes, index);
 
     ArrayRemoveIndex(node->nodes, index);
-    _TreeNode_Destroy(root, childNode);
+    _TreeNode_Destroy(root, childNode, callback);
   }
 }
 
