@@ -12,14 +12,14 @@ typedef struct Array_t {
   _u16 capacity;
 } Array_t;
 
-Array_t* ArrayCreate(_u16 capcity) {
+Array_t* ArrayCreate(_u16 capacity) {
   Array_t* array = (Array_t*)malloc(sizeof(Array_t));
 
   if (array == NULL) return NULL;
 
-  array->capacity = capcity;
+  array->capacity = capacity;
   array->size = 0;
-  array->values = (_ptr*)calloc(capcity, sizeof(_ptr));
+  array->values = (_ptr*)calloc(capacity, sizeof(_ptr));
   return array;
 }
 
