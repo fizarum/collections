@@ -11,7 +11,7 @@ extern "C" {
 
 typedef struct Array_t Array_t;
 
-Array_t* ArrayCreate(_u16 capcity);
+Array_t* ArrayCreate(const _u16 capacity);
 void ArrayDestroy(Array_t* array);
 
 _u16 ArraySize(const Array_t* array);
