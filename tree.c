@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-#define TREE_MAX_CHILDREN 8
+#define TREE_MAX_CHILDREN 16
 
 typedef struct TreeNode_t {
   _u16 id;
@@ -103,7 +103,9 @@ void Tree_Foreach(Tree_t* tree, TreeIterator iterator) {
 
 _u16 TreeNode_GetId(TreeNode_t* node) { return node->id; }
 
-void* TreeNode_GetData(TreeNode_t* node) { return node->data; }
+void* TreeNode_GetData(TreeNode_t* node) {
+  return node != NULL ? node->data : NULL;
+}
 
 bool TreeNode_IsLeaf(const TreeNode_t* node) { return node->nodes == NULL; }
 
