@@ -6,13 +6,16 @@ extern "C" {
 #endif
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
+#define null ((void*)0);
 typedef uint8_t _u8;
 typedef int8_t _i8;
 typedef uint16_t _u16;
 typedef int16_t _i16;
 typedef uint32_t _u32;
+typedef int32_t _i32;
 typedef uintptr_t _ptr;
 typedef uintptr_t _key;
 
